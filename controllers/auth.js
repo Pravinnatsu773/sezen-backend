@@ -23,6 +23,10 @@ const login = async (req, res, next) => {
 
 
     console.log(userData)
+    if(!userData){
+        res.json({msg:"User not registered"})
+        return
+    }
     const id = userData.id
     const token = jwt.sign({ id, email }, process.env.JWT_SECRET)
     res.json({ token: token, data: { _id: userData.id, email: userData.email } })
